@@ -17,3 +17,4 @@ thiserror = "2"
 dirs = "6"
 chrono = { version = "0.4", features = ["serde"] }
 rand = "0.8"
+libc = "0.2"

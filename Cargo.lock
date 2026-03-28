@@ -247,6 +247,7 @@ dependencies = [
  "chrono",
  "clap",
  "dirs",
+ "libc",
  "rand 0.8.5",
  "reqwest",
  "scraper",

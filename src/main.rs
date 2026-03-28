@@ -16,6 +16,12 @@ use crate::session::Session;
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
+    // Handle SIGPIPE gracefully (exit silently instead of panicking)
+    // This happens when output is piped to another command that closes early
+    #[cfg(unix)]
+    unsafe {
+        libc::signal(libc::SIGPIPE, libc::SIG_DFL);
+    }
     let mut cli = Cli::parse();
     let stealth = cli.stealth;
 

@@ -2,12 +2,25 @@
 
 `clibrowser` is installed at `~/.local/bin/clibrowser`. It is a CLI browser for AI agents — use it to browse the web, search, extract content, and interact with forms entirely via bash commands.
 
+## IMPORTANT: Commands are sequential, NOT piped
+
+`get` fetches and caches the page. Then `markdown`/`text`/`select`/`links`/`tables` read from the cache.
+
+```bash
+# CORRECT:
+clibrowser --stealth get "https://example.com"
+clibrowser markdown --max-length 3000
+
+# WRONG — do NOT pipe:
+clibrowser get "https://url" --json | clibrowser markdown
+```
+
 ## Quick reference
 
 ```bash
 clibrowser --stealth search "query" --json        # web search
 clibrowser --stealth search "query" --lucky        # search & navigate to first result
-clibrowser --stealth get "https://url" --json      # fetch a page
+clibrowser --stealth get "https://url"             # fetch a page
 clibrowser text --strip                            # extract text
 clibrowser markdown --max-length 3000              # convert page to markdown
 clibrowser links --absolute --json                 # extract links
@@ -23,4 +36,4 @@ clibrowser crawl "https://url" --depth 2 --json    # crawl link tree
 echo "url1\nurl2" | clibrowser pipe --title --json # batch process URLs
 ```
 
-Always use `--json` for structured output you can parse. Use `--stealth` for sites with bot detection.
+Use `--json` for structured output. Use `--stealth` for sites with bot detection.
