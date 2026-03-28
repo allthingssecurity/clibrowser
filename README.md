@@ -16,7 +16,7 @@ AI agents interact with tools via bash — but browsing the web has always requi
 | **Form interaction** | Yes | Yes | Yes | No | Limited |
 | **OAuth support** | Browser relay | Yes | Yes | No | Yes |
 | **WebMCP support** | Yes | No | No | No | No |
-| **Works offline** | Yes | Yes | Yes | No | Yes |
+| **Runs locally** | Yes (no cloud/API key) | Yes | Yes | No (cloud API) | Yes |
 
 **clibrowser is the only tool where an agent can do this with zero setup:**
 
