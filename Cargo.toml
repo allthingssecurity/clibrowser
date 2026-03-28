@@ -1,0 +1,19 @@
+[package]
+name = "clibrowser"
+version = "0.1.0"
+edition = "2021"
+description = "A CLI browser for AI agents"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+reqwest = { version = "0.12", features = ["cookies", "json", "gzip", "brotli", "deflate", "rustls-tls"], default-features = false }
+tokio = { version = "1", features = ["rt", "macros", "time"] }
+scraper = "0.22"
+url = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+thiserror = "2"
+dirs = "6"
+chrono = { version = "0.4", features = ["serde"] }
+rand = "0.8"
