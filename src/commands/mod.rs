@@ -15,6 +15,7 @@ pub mod rss;
 pub mod sitemap;
 pub mod markdown;
 pub mod pipe;
+pub mod webmcp;
 
 use anyhow::Result;
 use crate::cli::Command;
@@ -42,5 +43,7 @@ pub async fn dispatch(cmd: Command, session: &mut Session, out: &OutputConfig, s
         Command::Sitemap(args) => sitemap::execute(args, session, out, stealth).await,
         Command::Markdown(args) => markdown::execute(args, session, out),
         Command::Pipe(args) => pipe::execute(args, session, out, stealth).await,
+        Command::Webmcp(args) => webmcp::discover(args, session, out, stealth).await,
+        Command::WebmcpCall(args) => webmcp::call(args, session, out, stealth).await,
     }
 }

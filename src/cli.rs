@@ -81,6 +81,13 @@ pub enum Command {
 
     /// Process multiple URLs from stdin
     Pipe(crate::commands::pipe::PipeArgs),
+
+    /// Discover WebMCP tools on a page
+    Webmcp(crate::commands::webmcp::WebmcpArgs),
+
+    /// Call a WebMCP tool by name
+    #[command(name = "webmcp-call")]
+    WebmcpCall(crate::commands::webmcp::WebmcpCallArgs),
 }
 
 #[derive(clap::Args)]
