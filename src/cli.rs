@@ -88,6 +88,23 @@ pub enum Command {
     /// Call a WebMCP tool by name
     #[command(name = "webmcp-call")]
     WebmcpCall(crate::commands::webmcp::WebmcpCallArgs),
+
+    /// Login via browser (opens real browser for OAuth, captures cookies)
+    Auth(crate::commands::auth::AuthArgs),
+
+    /// Import cookies from browser (cookie string or JSON)
+    #[command(name = "import-cookies")]
+    ImportCookies(ImportCookiesArgs),
+}
+
+#[derive(clap::Args)]
+pub struct ImportCookiesArgs {
+    /// Cookie string ("name=val; name2=val2") or JSON array
+    pub cookies: String,
+
+    /// Domain to associate cookies with
+    #[arg(long)]
+    pub domain: String,
 }
 
 #[derive(clap::Args)]
