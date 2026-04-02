@@ -1,0 +1,47 @@
+[package]
+name = "cliformsoffice"
+version = "0.1.0"
+edition = "2021"
+description = "CLI tool for AI agents to read, write, and manipulate MS Office and PDF files"
+
+[dependencies]
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+anyhow = "1"
+thiserror = "2"
+
+# PDF
+lopdf = "0.40"
+pdf-extract = "0.10"
+printpdf = "0.9"
+
+# Word (.docx)
+docx-rs = "0.4"
+
+# Excel (.xlsx)
+calamine = "0.34"
+rust_xlsxwriter = "0.94"
+umya-spreadsheet = "2.3"
+
+# PowerPoint (.pptx)
+pptx = "0.1"
+pptx-to-md = "0.4"
+
+# Utilities
+regex = "1"
+csv = "1"
+pulldown-cmark = "0.12"
+infer = "0.19"
+which = "7"
+tempfile = "3"
+zip = "2"
+
+# SIGPIPE
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
