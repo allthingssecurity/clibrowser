@@ -1,0 +1,19 @@
+[package]
+name = "cligit"
+version = "0.1.0"
+edition = "2021"
+description = "Git CLI for AI agents — structured JSON output for every operation"
+
+[dependencies]
+git2 = "0.19"
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+thiserror = "2"
+regex = "1"
+chrono = { version = "0.4", features = ["serde"] }
+glob = "0.3"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
