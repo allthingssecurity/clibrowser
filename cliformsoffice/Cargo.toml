@@ -1,6 +1,6 @@
 [package]
 name = "cliformsoffice"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "CLI tool for AI agents to read, write, and manipulate MS Office and PDF files"
 
@@ -41,6 +41,8 @@ infer = "0.19"
 which = "7"
 tempfile = "3"
 zip = "2"
+similar = "2"
+glob = "0.3"
 
 # SIGPIPE
 [target.'cfg(unix)'.dependencies]

@@ -19,6 +19,24 @@ pub mod merge;
 pub mod split;
 pub mod rotate;
 pub mod protect;
+pub mod summary;
+pub mod diff;
+pub mod extract;
+pub mod replace;
+pub mod pipe;
+pub mod batch;
+pub mod cells;
+pub mod schema;
+pub mod add_section;
+pub mod query;
+pub mod fill_template;
+pub mod redact;
+pub mod validate;
+pub mod formulas;
+pub mod stats;
+pub mod watermark;
+pub mod headers_footers;
+pub mod remove;
 
 use anyhow::Result;
 use crate::cli::Command;
@@ -47,5 +65,23 @@ pub fn dispatch(cmd: Command, out: &OutputConfig, format_override: Option<&str>)
         Command::Split(args) => split::execute(args, out),
         Command::Rotate(args) => rotate::execute(args, out),
         Command::Protect(args) => protect::execute(args, out),
+        Command::Summary(args) => summary::execute(args, out, format_override),
+        Command::Diff(args) => diff::execute(args, out, format_override),
+        Command::Extract(args) => extract::execute(args, out, format_override),
+        Command::Replace(args) => replace::execute(args, out, format_override),
+        Command::Pipe(args) => pipe::execute(args, out),
+        Command::Batch(args) => batch::execute(args, out),
+        Command::Cells(args) => cells::execute(args, out, format_override),
+        Command::Schema(args) => schema::execute(args, out, format_override),
+        Command::AddSection(args) => add_section::execute(args, out, format_override),
+        Command::Query(args) => query::execute(args, out, format_override),
+        Command::FillTemplate(args) => fill_template::execute(args, out, format_override),
+        Command::Redact(args) => redact::execute(args, out, format_override),
+        Command::Validate(args) => validate::execute(args, out, format_override),
+        Command::Formulas(args) => formulas::execute(args, out, format_override),
+        Command::Stats(args) => stats::execute(args, out, format_override),
+        Command::Watermark(args) => watermark::execute(args, out, format_override),
+        Command::HeadersFooters(args) => headers_footers::execute(args, out, format_override),
+        Command::Remove(args) => remove::execute(args, out, format_override),
     }
 }

@@ -161,3 +161,139 @@ pub struct WriteResult {
     pub format: String,
     pub message: String,
 }
+
+// ─── v0.2 models ────────────────────────────────────────────
+
+#[derive(Serialize)]
+pub struct SummaryResult {
+    pub title: Option<String>,
+    pub outline: Vec<String>,
+    pub section_previews: Vec<String>,
+    pub table_count: usize,
+    pub image_count: usize,
+    pub link_count: usize,
+    pub comment_count: usize,
+    pub word_count: usize,
+}
+
+#[derive(Serialize)]
+pub struct DiffLine {
+    pub tag: String,
+    pub text: String,
+}
+
+#[derive(Serialize)]
+pub struct DiffResult {
+    pub added: usize,
+    pub removed: usize,
+    pub changed: usize,
+    pub summary: String,
+    pub lines: Vec<DiffLine>,
+}
+
+#[derive(Serialize)]
+pub struct ExtractResult {
+    pub fields: std::collections::HashMap<String, serde_json::Value>,
+}
+
+#[derive(Serialize)]
+pub struct ReplaceResult {
+    pub file: String,
+    pub replacements: usize,
+    pub message: String,
+}
+
+#[derive(Serialize)]
+pub struct CellData {
+    pub cell: String,
+    pub value: String,
+    pub cell_type: String,
+}
+
+#[derive(Serialize)]
+pub struct CellsResult {
+    pub cells: Vec<CellData>,
+}
+
+#[derive(Serialize)]
+pub struct SchemaColumn {
+    pub name: String,
+    pub data_type: String,
+    pub nulls: usize,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sample: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub min: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max: Option<String>,
+}
+
+#[derive(Serialize)]
+pub struct SheetSchema {
+    pub sheet: String,
+    pub columns: Vec<SchemaColumn>,
+    pub row_count: usize,
+}
+
+#[derive(Serialize)]
+pub struct SchemaResult {
+    pub sheets: Vec<SheetSchema>,
+}
+
+#[derive(Serialize)]
+pub struct QueryResult {
+    pub columns: Vec<String>,
+    pub rows: Vec<Vec<serde_json::Value>>,
+    pub count: usize,
+}
+
+#[derive(Serialize)]
+pub struct RedactMatch {
+    pub text: String,
+    pub pattern_type: String,
+    pub location: Option<String>,
+}
+
+#[derive(Serialize)]
+pub struct RedactResult {
+    pub matches: Vec<RedactMatch>,
+    pub count: usize,
+    pub redacted: bool,
+}
+
+#[derive(Serialize)]
+pub struct ValidationIssue {
+    pub rule: String,
+    pub message: String,
+    pub severity: String,
+}
+
+#[derive(Serialize)]
+pub struct ValidateResult {
+    pub valid: bool,
+    pub issues: Vec<ValidationIssue>,
+}
+
+#[derive(Serialize)]
+pub struct FormulaInfo {
+    pub cell: String,
+    pub formula: String,
+    pub value: Option<String>,
+}
+
+#[derive(Serialize)]
+pub struct FormulasResult {
+    pub count: usize,
+    pub formulas: Vec<FormulaInfo>,
+}
+
+#[derive(Serialize)]
+pub struct StatsResult {
+    pub words: usize,
+    pub sentences: usize,
+    pub paragraphs: usize,
+    pub avg_sentence_length: f64,
+    pub reading_level: f64,
+    pub unique_words: usize,
+    pub top_words: Vec<(String, usize)>,
+}
