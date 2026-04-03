@@ -38,6 +38,12 @@ pub mod pr_diff;
 pub mod conflicts;
 pub mod config;
 
+pub mod analyze;
+pub mod tree;
+pub mod deps;
+pub mod languages;
+pub mod context;
+
 use anyhow::Result;
 use crate::cli::Command;
 use crate::git_ctx::GitContext;
@@ -88,6 +94,13 @@ pub fn dispatch(cmd: Command, ctx: &mut GitContext, out: &OutputConfig) -> Resul
         Command::PrDiff(a) => pr_diff::execute(a, ctx, out),
         Command::Conflicts(a) => conflicts::execute(a, ctx, out),
         Command::Config(a) => config::execute(a, Some(ctx), out),
+
+        // Analysis (v0.2)
+        Command::Analyze(a) => analyze::execute(a, ctx, out),
+        Command::Tree(a) => tree::execute(a, ctx, out),
+        Command::Deps(a) => deps::execute(a, ctx, out),
+        Command::Languages(a) => languages::execute(a, ctx, out),
+        Command::Context(a) => context::execute(a, ctx, out),
 
         // Clone handled separately in main
         Command::Clone(_) => unreachable!("Clone should be handled before dispatch"),

@@ -5,6 +5,7 @@ mod git_ctx;
 mod git_shell;
 mod models;
 mod output;
+mod detect;
 
 use clap::Parser;
 use std::process;

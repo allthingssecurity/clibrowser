@@ -346,3 +346,97 @@ pub struct ConfigResult {
 pub struct ConfigListResult {
     pub entries: Vec<ConfigResult>,
 }
+
+// v0.2 analysis models
+
+#[derive(Serialize)]
+pub struct LanguageInfo {
+    pub language: String,
+    pub files: usize,
+    pub lines: usize,
+    pub percentage: f64,
+}
+
+#[derive(Serialize)]
+pub struct LanguagesResult {
+    pub count: usize,
+    pub total_files: usize,
+    pub total_lines: usize,
+    pub languages: Vec<LanguageInfo>,
+}
+
+#[derive(Serialize)]
+pub struct TreeEntry {
+    pub path: String,
+    pub entry_type: String, // "file" or "dir"
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub size: Option<usize>,
+    pub depth: usize,
+}
+
+#[derive(Serialize)]
+pub struct TreeResult {
+    pub count: usize,
+    pub entries: Vec<TreeEntry>,
+}
+
+#[derive(Serialize)]
+pub struct DependencyInfo {
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub version: Option<String>,
+    pub dep_type: String, // "runtime", "dev", "build"
+}
+
+#[derive(Serialize)]
+pub struct ManifestInfo {
+    pub file: String,
+    pub manager: String,
+    pub deps: Vec<DependencyInfo>,
+}
+
+#[derive(Serialize)]
+pub struct DepsResult {
+    pub manifest_count: usize,
+    pub total_deps: usize,
+    pub manifests: Vec<ManifestInfo>,
+}
+
+#[derive(Serialize)]
+pub struct KeyFile {
+    pub path: String,
+    pub category: String, // "entry_point", "config", "docs", "test"
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub lines: Option<usize>,
+}
+
+#[derive(Serialize)]
+pub struct AnalyzeResult {
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    pub languages: Vec<LanguageInfo>,
+    pub tech_stack: Vec<String>,
+    pub key_files: Vec<KeyFile>,
+    pub file_count: usize,
+    pub total_lines: usize,
+    pub deps: Vec<ManifestInfo>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub readme_excerpt: Option<String>,
+    pub file_tree: Vec<String>,
+}
+
+#[derive(Serialize)]
+pub struct ContextResult {
+    pub repo_name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    pub languages: Vec<LanguageInfo>,
+    pub file_tree: String,
+    pub key_files: Vec<String>,
+    pub deps_summary: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub readme: Option<String>,
+    pub recent_commits: Vec<String>,
+    pub total_length: usize,
+}

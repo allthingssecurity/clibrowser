@@ -97,6 +97,18 @@ pub enum Command {
     Conflicts(ConflictsArgs),
     /// Get or set config values
     Config(ConfigArgs),
+
+    // Analysis commands (v0.2)
+    /// Deep repository analysis (architecture, tech stack, key files)
+    Analyze(AnalyzeArgs),
+    /// Smart filtered file tree
+    Tree(TreeArgs),
+    /// Parse dependencies from manifest files
+    Deps(DepsArgs),
+    /// Language breakdown with line counts
+    Languages(LanguagesArgs),
+    /// LLM-ready repo context packet
+    Context(ContextArgs),
 }
 
 // --- Read command args ---
@@ -408,4 +420,51 @@ pub struct ConfigArgs {
     pub list: bool,
     #[arg(long, help = "Scope: local, global, system")]
     pub scope: Option<String>,
+}
+
+// v0.2 analysis args
+
+#[derive(clap::Args)]
+pub struct AnalyzeArgs {
+    /// Analysis depth (quick or deep)
+    #[arg(long, default_value = "deep")]
+    pub depth: String,
+}
+
+#[derive(clap::Args)]
+pub struct TreeArgs {
+    /// Max directory depth
+    #[arg(long)]
+    pub depth: Option<usize>,
+    /// Show file sizes
+    #[arg(long)]
+    pub sizes: bool,
+    /// Don't filter out noise directories
+    #[arg(long)]
+    pub no_filter: bool,
+    /// Glob pattern to filter
+    #[arg(long)]
+    pub pattern: Option<String>,
+}
+
+#[derive(clap::Args)]
+pub struct DepsArgs {}
+
+#[derive(clap::Args)]
+pub struct LanguagesArgs {}
+
+#[derive(clap::Args)]
+pub struct ContextArgs {
+    /// Max output length in characters
+    #[arg(long, default_value = "8000")]
+    pub max_length: usize,
+    /// Include README content
+    #[arg(long, default_value = "true")]
+    pub include_readme: bool,
+    /// Include file tree
+    #[arg(long, default_value = "true")]
+    pub include_tree: bool,
+    /// Include dependencies
+    #[arg(long, default_value = "true")]
+    pub include_deps: bool,
 }
